@@ -44,7 +44,6 @@ function randomColors() {
     resetInputs()
 }
 
-
 function checkTextContrast(color, text) {
     const luminance = chroma(color).luminance()
     if (luminance > 0.5) {
@@ -53,7 +52,6 @@ function checkTextContrast(color, text) {
         text.style.color = 'white'
     }
 }
-
 
 function colorizeSliders(color, hue, brightness, saturation) {
     const noSat = color.set('hsl.s', 0)
