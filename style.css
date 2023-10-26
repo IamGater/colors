@@ -40,13 +40,13 @@ svg {
   position: absolute;
   bottom: 0%;
   background: rgb(211, 211, 211);
-  /* opacity: 0; */
+  opacity: 0;
   padding: 1rem;
   width: 80%;
   border-top-right-radius: 1rem;
-  /* pointer-events: none; */
+  pointer-events: none;
   border-top-left-radius: 1rem;
-  /* transform: translateY(100px); */
+  transform: translateY(100px);
   transition: all 0.5s ease-in-out;
 }
 .sliders.active {
@@ -114,7 +114,7 @@ input[type="range"] {
   border-radius: 1rem;
   cursor: pointer;
 }
-.copy-container{
+.copy-container {
   position: fixed;
   top: 0%;
   left: 0%;
@@ -124,10 +124,11 @@ input[type="range"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease-in-out;
   opacity: 0;
   pointer-events: none;
 }
-.copy-popup{
+.copy-popup {
   background: white;
   display: flex;
   flex-direction: column;
@@ -139,14 +140,14 @@ input[type="range"] {
   min-width: 30%;
   min-height: 30vh;
 }
-.copy-popup h4{
+.copy-popup h4 {
   font-size: 2rem;
   padding: 2rem;
 }
-.copy-container.active{
+.copy-container.active {
   opacity: 1;
   pointer-events: all;
 }
-.copy-popup.active{
+.copy-popup.active {
   transform: translateY(0rem);
 }
