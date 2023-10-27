@@ -3,11 +3,13 @@ const generateBtn = document.querySelector('.generate')
 const sliders = document.querySelectorAll('input[type="range"]')
 const currentHexes = document.querySelectorAll('.color h2')
 const popup = document.querySelector('.copy-container')
-const adjustButton = document.querySelectorAll('.ajust')
-const closeAjustments = document.querySelectorAll('.close-adjustment')
+const adjustButton = document.querySelectorAll('.adjust')
+const closeAdjustments = document.querySelectorAll(".close-adjustment");
 const sliderContainers = document.querySelectorAll('.sliders')
 const lockButton = document.querySelectorAll('.lock')
 let initialColors
+
+let savedPalettes = []
 
 generateBtn.addEventListener('click', randomColors)
 
@@ -36,15 +38,20 @@ popup.addEventListener('transitionend', () => {
 adjustButton.forEach((button, index) => {
     button.addEventListener('click', () => {
         openAdjustmentPanel(index)
-        console.log('openAdjustmentPanel: ', openAdjustmentPanel);
     })
 })
 
-// closeAdjustments.forEach((button, index) => {
-//     button.addEventListener('click', () => {
-//         closeAdjustmentPanel(index)
-//     })
-// })
+closeAdjustments.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    closeAdjustmentPanel(index);
+  });
+});
+
+lockButton.forEach((button, index) => {
+    button.addEventListener('click', e => {
+        lockLayer(e, index)
+    })
+})
 
 
 function generateHex() {
@@ -58,8 +65,13 @@ function randomColors() {
         const hexText = div.children[0]
         const randomColor = generateHex()
 
-        initialColors.push(chroma(randomColor).hex())
-
+        if (div.classList.contains('locked')) {
+            initialColors.push(hexText.innerText)
+            return
+        } else {
+            initialColors.push(chroma(randomColor).hex())
+        }
+        
         div.style.backgroundColor = randomColor
         hexText.innerText = randomColor
 
@@ -169,6 +181,39 @@ function openAdjustmentPanel(index) {
 }
 function closeAdjustmentPanel(index) {
     sliderContainers[index].classList.remove('active')
+}
+
+function lockLayer(e, index) {
+    const lockSVG = e.target.children[0]
+    const activeBg = colorDivs[index]
+    activeBg.classList.toggle('locked')
+
+    if (lockSVG.classList.contains('fa-lock-open')) {
+        e.target.innerHTML = '<i class="fas fa-lock"></i>'
+    } else {
+        e.target.innerHTML = '<i class="fas fa-lock-open"></i>'
+    }
+}
+
+const saveBtn = document.querySelector('.save')
+const submitSave = document.querySelector('.submit-save')
+const closeSave = document.querySelector('.close-save')
+const saveContainer = document.querySelector('.save-container')
+const saveInput = document.querySelector('.save-container input')
+
+saveBtn.addEventListener('click', openPalette)
+closeSave.addEventListener('click', closePalette)
+
+function openPalette(e) {
+    const popup = saveContainer.children[0]
+    saveContainer.classList.add('active')
+    popup.classList.add('active')
+}
+
+function closePalette(e) {
+    const popup = saveContainer.children[0]
+    saveContainer.classList.remove('active')
+    popup.classList.remove('active')
 }
 
 randomColors()
