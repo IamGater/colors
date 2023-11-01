@@ -244,6 +244,8 @@ function savePalette(e) {
     // savetoLocal(paletteObj)
     // saveInput.value = ''
 
+    let paletteObj
+
     const palette = document.createElement('div')
     palette.classList.add('custom-palette')
     const title = document.createElement('h4')
