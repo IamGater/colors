@@ -167,10 +167,14 @@ input[type="range"] {
   font-size: 1.5rem;
   padding: 1rem;
 }
-.close-save,
+.close-save {
+  border-top-right-radius: 9rem;
+  border-bottom-left-radius: 6rem;
+  padding: 0.5rem;
+}
 .close-library {
-  border-top-right-radius: 1rem;
-  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 2rem;
   padding: 0.5rem;
 }
 
