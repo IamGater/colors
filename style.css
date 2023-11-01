@@ -174,7 +174,8 @@ input[type="range"] {
 }
 .close-library {
   border-top-left-radius: 0rem;
-  border-bottom-left-radius: 2rem;
+  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 2rem;
   padding: 0.5rem;
 }
 
@@ -191,7 +192,6 @@ input[type="range"] {
   min-width: 40%;
   padding: 1rem;
   justify-content: flex-start;
-  overflow-y: scroll;
   max-height: 50vh;
 }
 .custom-palette {
@@ -208,7 +208,11 @@ input[type="range"] {
 .custom-palette h4 {
   flex: 1;
 }
+.small-preview {
+  display: flex;
+}
 .small-preview div {
+  width: 1rem;
   height: 5rem;
   flex: 1;
 }
