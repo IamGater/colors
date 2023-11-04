@@ -204,11 +204,16 @@ const saveInput = document.querySelector('.save-container input')
 const libraryContainer = document.querySelector('.library-container')
 const libraryBtn = document.querySelector('.library')
 const closeLibraryBtn = document.querySelector('.close-library')
+const deleteBtn = document.querySelector('.delete')
+const deleteContainer = document.querySelector('.delete-container')
+const closeDeleteBtn = document.querySelector('.close-delete')
 
 saveBtn.addEventListener('click', openPalette)
 closeSave.addEventListener('click', closePalette)
 libraryBtn.addEventListener('click', openLibrary)
 closeLibraryBtn.addEventListener('click', closeLibrary)
+deleteBtn.addEventListener('click', openDelete)
+closeDeleteBtn.addEventListener('click', closeDelete)
 
 function openPalette(e) {
     const popup = saveContainer.children[0]
@@ -238,13 +243,13 @@ function savePalette(e) {
         paletteNr = savedPalettes.length
     }
 
-    //  = savedPalettes.length
-    // const paletteObj = { name, colors, nr: paletteNr }
-    // savedPalettes.push(paletteObj)
-    // savetoLocal(paletteObj)
-    // saveInput.value = ''
+    // let paletteObj = savedPalettes.length
+    
 
-    let paletteObj
+    const paletteObj = { name, colors, nr: paletteNr }
+    savedPalettes.push(paletteObj)
+    savetoLocal(paletteObj)
+    saveInput.value = ''
 
     const palette = document.createElement('div')
     palette.classList.add('custom-palette')
@@ -258,15 +263,15 @@ function savePalette(e) {
         preview.appendChild(smallDiv)
     })
     const paletteBtn = document.createElement('button')
-    palette.classList.add('pick-palette-btn')
-    palette.classList.add(paletteObj.nr)
+    paletteBtn.classList.add('pick-palette-btn')
+    paletteBtn.classList.add(paletteObj.nr)
     paletteBtn.innerText = 'Select'
 
-    palette.addEventListener('click', e => {
+    paletteBtn.addEventListener('click', e => {
         closeLibrary()
         const paletteIndex = e.target.classList[1]
         initialColors = []
-        savedPalettes[paletteIndex].color.forEach((color, index) => {
+        savedPalettes[paletteIndex].colors.forEach((color, index) => {
             initialColors.push(color)
             colorDivs[index].style.backgroundColor = color
             const text = colorDivs[index].children[0]
@@ -305,12 +310,24 @@ function closeLibrary() {
     popup.classList.remove('active')
 }
 
+function openDelete() {
+    const popup = deleteContainer.children[0]
+    deleteContainer.classList.add('active')
+    popup.classList.add('active')
+}
+
+function closeDelete() {
+    const popup = deleteContainer.children[0]
+    deleteContainer.classList.remove('active')
+    popup.classList.remove('active')
+}
+
 function getLocal() {
     if (localStorage.getItem('palettes') === null) {
         localPalettes = []
     } else {
         const paletteObjects = JSON.parse(localStorage.getItem('palettes'))
-        paletteObjects = [...paletteObjects]
+        savedPalettes = [...paletteObjects]
         paletteObjects.forEach(paletteObj => {
             const palette = document.createElement('div')
     palette.classList.add('custom-palette')
@@ -328,11 +345,11 @@ function getLocal() {
     palette.classList.add(paletteObj.nr)
     paletteBtn.innerText = 'Select'
 
-    palette.addEventListener('click', e => {
+    paletteBtn.addEventListener('click', e => {
         closeLibrary()
         const paletteIndex = e.target.classList[1]
         initialColors = []
-        paletteObjects[paletteIndex].color.forEach((color, index) => {
+        paletteObjects[paletteIndex].colors.forEach((color, index) => {
             initialColors.push(color)
             colorDivs[index].style.backgroundColor = color
             const text = colorDivs[index].children[0]
@@ -350,6 +367,21 @@ function getLocal() {
         })
     }  
 }
+
+const deleteLocal = document.querySelector('.delete')
+
+deleteLocal.addEventListener('click', () => {
+
+    const customPalettes = document.querySelectorAll('.custom-palette')
+   
+    let elementsArray = Array.from(customPalettes);
+   elementsArray.forEach(function(element) {
+    element.remove();
+});
+    localStorage.clear()
+    openDelete() 
+    
+})
 
 getLocal()
 randomColors()

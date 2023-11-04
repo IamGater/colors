@@ -56,7 +56,8 @@ svg {
 }
 .sliders button,
 .close-save,
-.close-library {
+.close-library,
+.close-delete {
   position: absolute;
   top: 0;
   right: 0;
@@ -118,7 +119,8 @@ input[type="range"] {
 }
 .copy-container,
 .save-container,
-.library-container {
+.library-container,
+.delete-container {
   position: fixed;
   top: 0%;
   left: 0%;
@@ -134,7 +136,8 @@ input[type="range"] {
 }
 .copy-popup,
 .save-popup,
-.library-popup {
+.library-popup,
+.delete-popup {
   background: white;
   display: flex;
   flex-direction: column;
@@ -148,19 +151,22 @@ input[type="range"] {
 }
 .copy-popup h4,
 .save-popup h4,
-.library-popup h4 {
+.library-popup h4,
+.delete-popup h4 {
   font-size: 2rem;
   padding: 1rem;
 }
 .copy-container.active,
 .save-container.active,
-.library-container.active {
+.library-container.active,
+.delete-container.active {
   opacity: 1;
   pointer-events: all;
 }
 .copy-popup.active,
 .save-popup.active,
-.library-popup.active {
+.library-popup.active,
+.delete-popup.active {
   transform: translateY(0rem);
 }
 .save-name {
@@ -177,7 +183,12 @@ input[type="range"] {
   border-bottom-left-radius: 1rem;
   border-top-right-radius: 2rem;
   padding: 0.5rem;
-  padding-right: 0;
+}
+.close-delete {
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 2rem;
+  padding: 0.5rem;
 }
 
 .submit-save {
